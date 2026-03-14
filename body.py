@@ -64,7 +64,37 @@ def _gen_price_list_table(width, height):
 
 def _gen_description_paragraphs():
 
-    return 'DESCRIPTION'
+    para_list = []
+
+    para1_style = ParagraphStyle('para1d')
+    para1_style.fontSize = 10
+    para1_style.spaceAfter = 15
+    para1_style.textColor = colors.HexColor('#003363')
+    para1 = Paragraph("""
+    <b>
+    Thank you very much for using the services from us at Palms. 
+    Here at Palms Hotel we have living rooms and well-equipped 
+    meeting rooms of all sizes with a capacity from 8 - 300 people,
+    so that we will be well prepared for most needs you may have.
+    </b>       
+    """"", para1_style)
+
+    para2_style = ParagraphStyle('para2d')
+    para2_style.fontSize = 10
+    para2 = Paragraph("""
+    <i>
+    Palms Hotel is also known for its cuisine and good service, 
+    therefore you can feel confident that your needs and desires 
+    will be well taken care of, whether you choose to use our 
+    beautiful Restaurant Palms or other living rooms, 
+    we guarantee a <u>good experience with us.</u>
+    </i>
+    """, para2_style)
+
+    para_list.append(para1)
+    para_list.append(para2)
+
+    return para_list
 
 
 def _gen_about_table(width, height):
@@ -79,7 +109,6 @@ def _gen_about_table(width, height):
                 height,
                 kind = 'proportional'
     )
-
 
     para1Style = ParagraphStyle('para1')
     para1Style.fontSize = 14
