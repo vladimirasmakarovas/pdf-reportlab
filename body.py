@@ -1,5 +1,6 @@
-from reportlab.platypus import Table
+from reportlab.platypus import Paragraph, Image, Table
 from reportlab.lib import colors
+from reportlab.lib.styles import ParagraphStyle
 
 def gen_body_table(width, height):
 
@@ -68,6 +69,51 @@ def _gen_description_paragraphs():
 
 def _gen_about_table(width, height):
 
-    return 'ABOUT'
+    width_list = [
+        width * 20 / 100, # image
+        width * 80 / 100 # paragraphs
+    ]
+
+    img = Image('resources\\logoParadise.png',
+                width_list[0],
+                height,
+                kind = 'proportional'
+    )
+
+
+    para1Style = ParagraphStyle('para1')
+    para1Style.fontSize = 14
+    para1Style.spaceAfter = 15
+    para1 = Paragraph('Palms Hotels', para1Style)
+
+    para2Style = ParagraphStyle('para2')
+    para2Style.fontSize = 8
+    para2 = Paragraph("""
+    Ever since 2004, Palms Hotel has received accommodation and
+    dining guests. The hotel and restaurants has been run 
+    and owned by th Dubai SGPS.    
+    """, para2Style)
+
+    para_list = [para1, para2]
+
+    res = Table([
+            [img, para_list]
+        ],
+        width_list,
+        height)
+
+    res.setStyle([
+        # ('GRID', (0, 0), (-1, -1), 1, 'red'),
+
+        ('LEFTPADDING', (0, 0), (0, 0), 0),
+        ('BOTTOMPADDING', (0, 0), (1, 0), 0),
+
+        ('ALIGN', (0, 0), (0, 0), 'CENTER'),
+        ('VALIGN', (0, 0), (1, 0), 'MIDDLE'),
+
+        # ('FONTSIZE', (1,0), (1,0), 30),
+    ])
+
+    return res
 
 
